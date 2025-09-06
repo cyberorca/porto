@@ -5528,9 +5528,11 @@
                         adunit = "HEADLINE";
                     } else if (adunit === "dfp-exposer-slot1") {
                         adunit = "EXPOSER";
-                        size = size.replace(/(300x250,)/ig,'');
                     }                    
-                  
+                    
+                    /*remove 300x250 on exposer ads*/
+                    size = "EXPOSER" === adunit ? size.replace(/(300x250,)/ig,'') : size;
+
                     /*convert size attribute from string to array*/
                     var sizes = [], adunitPath = '/36504930/KLY/MOBILE/LIPUTAN6.COM/' + adunit, adSlot;
                     
