@@ -4753,8 +4753,9 @@ window.showAds = function(adsContainer, size, adunit) {
 
 
     if( "EXPOSER" === adunit ) {
-        size = size.replace(/(300x250,?)/ig, "");
+        size = String(size.split(",").filter((x)=>{return ["300x250","160x600"].indexOf(x) <0 ? x : '';}))
     }   
+    
     console.log("SIZE : ", size, " | ADUNIT : ", adunit, " | CONTAINER : ", adsContainer);
 
     adunitPath = '/36504930/KLY/MOBILE/KAPANLAGI.COM/' + adunit;
