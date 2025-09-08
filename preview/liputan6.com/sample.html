@@ -3,6 +3,47 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Find the header element (class 'headers')
+            var header = document.querySelector('.headers');
+            if (!header) return;
+
+            // Get the header's initial offset from the top
+            var headerTop = header.getBoundingClientRect().top + window.scrollY;
+
+            // Make header fixed relative to its parent, but stop at parent's bottom
+            var parent = header.parentElement;
+            var parentRect = parent.getBoundingClientRect();
+            var headerHeight = header.offsetHeight;
+
+            window.addEventListener('scroll', function() {
+                var parentTop = parent.getBoundingClientRect().top + window.scrollY;
+                var parentBottom = parentTop + parent.offsetHeight;
+                var scrollY = window.scrollY;
+
+                if (scrollY > headerTop && scrollY + headerHeight < parentBottom) {
+                    header.style.position = 'fixed';
+                    header.style.top = '0px';
+                    header.style.left = header.getBoundingClientRect().left + 'px';
+                    header.style.width = header.offsetWidth + 'px';
+                    header.style.zIndex = '1000';
+                } else if (scrollY + headerHeight >= parentBottom) {
+                    header.style.position = 'absolute';
+                    header.style.top = (parent.offsetHeight - headerHeight) + 'px';
+                    header.style.left = '';
+                    header.style.width = '';
+                    header.style.zIndex = '1000';
+                } else {
+                    header.style.position = '';
+                    header.style.top = '';
+                    header.style.left = '';
+                    header.style.width = '';
+                    header.style.zIndex = '';
+                }
+            });
+        });
+      </script>
       <style>
             html, body {
                 background: #F5F7FA;
@@ -14,13 +55,14 @@
                 margin: 10em auto 30em;
                 max-width: 960px;
                 overscroll-behavior: contain;
+                overflow: visible;
             }
-
             .headers {
                 top: 0;
                 position: -webkit-sticky;
                 position: sticky;
                 z-index: 1;
+                overflow: visible;
             }
 
             .tracks,
