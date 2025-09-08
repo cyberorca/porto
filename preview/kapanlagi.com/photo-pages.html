@@ -4728,7 +4728,7 @@ window.showAds = function(adsContainer, size, adunit) {
     // 	document.querySelectorAll("[container*=showcase], [container*=exposer]").forEach(v=>v.remove())
     //     return;
     // }
-  
+
     const observerOptions = {
         rootMargin: '0px',
         threshold: 0.05
@@ -4750,6 +4750,13 @@ window.showAds = function(adsContainer, size, adunit) {
                 break;
         }
     }
+
+
+    if( "EXPOSER" === adunit ) {
+        size = size.replace(/(300x250,?)/ig, "");
+    }   
+    console.log("SIZE : ", size);
+
     adunitPath = '/36504930/KLY/MOBILE/KAPANLAGI.COM/' + adunit;
     GAMLibrary.dfpPageNum++;
     size.split(",").forEach(function(item, index) {
@@ -4818,9 +4825,18 @@ window.showAds = function(adsContainer, size, adunit) {
 document.addEventListener("DOMContentLoaded", _INIT_STICKY_TOPFRAME_);
 
 function _INIT_STICKY_TOPFRAME_() {
-    _CONTAINER_TARGET_ = document.querySelectorAll(".container");
-    _HEADER_ELEMENT_ = _CONTAINER_TARGET_[0];
-    _PARENT_BODY_TARGET_ = _CONTAINER_TARGET_[2];
+    let main = document.querySelector("main");
+    let header = document.querySelector("header");
+    //_CONTAINER_TARGET_ = document.querySelectorAll(".container");
+    //_HEADER_ELEMENT_ = _CONTAINER_TARGET_[0];
+    //_PARENT_BODY_TARGET_ = _CONTAINER_TARGET_[2];
+    _HEADER_ELEMENT_ = header && header;
+    _PARENT_BODY_TARGET_ = main && main;
+
+    if (_HEADER_ELEMENT_ === null || _PARENT_BODY_TARGET_ === null) {
+        return;
+    }
+
     _TOPFRAME_PARENT_WRAPPER_ = document.querySelector("#div-gpt-ad-topfrm-parallax-wrapper");
     _TOPFRAME_WRAPPER_ = document.querySelector("#div-gpt-ad-topfrm-parallax-wrapper");
     //edit end
