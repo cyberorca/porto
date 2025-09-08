@@ -4755,7 +4755,7 @@ window.showAds = function(adsContainer, size, adunit) {
     if( "EXPOSER" === adunit ) {
         size = size.replace(/(300x250,?)/ig, "");
     }   
-    console.log("SIZE : ", size);
+    console.log("SIZE : ", size, " | ADUNIT : ", adunit, " | CONTAINER : ", adsContainer);
 
     adunitPath = '/36504930/KLY/MOBILE/KAPANLAGI.COM/' + adunit;
     GAMLibrary.dfpPageNum++;
