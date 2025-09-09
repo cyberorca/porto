@@ -4751,14 +4751,14 @@ window.showAds = function(adsContainer, size, adunit) {
         }
     }
 
-
+    /** Exclude 300x250 & 160x600 from Exposer */
     if( "EXPOSER" === adunit ) {
         size = String(size.split(",").filter((x)=>{return ["300x250","160x600"].indexOf(x) <0 ? x : '';}))
     }   
-    
-    console.log("SIZE : ", size, " | ADUNIT : ", adunit, " | CONTAINER : ", adsContainer);
 
     adunitPath = '/36504930/KLY/MOBILE/KAPANLAGI.COM/' + adunit;
+    console.log("adunitPath : ",adunitPath);
+    
     GAMLibrary.dfpPageNum++;
     size.split(",").forEach(function(item, index) {
         if (item == 'fluid') {
