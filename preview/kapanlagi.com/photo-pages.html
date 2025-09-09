@@ -4758,16 +4758,13 @@ window.showAds = function(adsContainer, size, adunit) {
 
     adunitPath = '/36504930/KLY/MOBILE/KAPANLAGI.COM/' + adunit;
     console.log("adunitPath : ",adunitPath);
-    
+
     GAMLibrary.dfpPageNum++;
     size.split(",").forEach(function(item, index) {
         if (item == 'fluid') {
             sizes[index] = item;
         } else {
-            /** Dok. 04092025 - EXCLUDE SHOWCASE IN EXPOSER  */
-            if("300x250" !== item && !adsContainer.includes("exposer")) {
-                 sizes[index] = item.split("x").map(Number);
-            }
+            sizes[index] = item.split("x").map(Number);
         }
     });
 
